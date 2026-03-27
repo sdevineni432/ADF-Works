@@ -1,0 +1,83 @@
+{
+	"name": "ADE_Join_dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ADE_CusT_Input",
+						"type": "DatasetReference"
+					},
+					"name": "ADECustsource1"
+				},
+				{
+					"dataset": {
+						"referenceName": "ADE_Ordersinput",
+						"type": "DatasetReference"
+					},
+					"name": "ADEordersSource1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ADE_JOinedData",
+						"type": "DatasetReference"
+					},
+					"name": "ADEoutputdatasink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ADELeftJoin"
+				},
+				{
+					"name": "ADEselectedColumns",
+					"description": "Renaming ADELeftJoin to ADEselectedColumns with columns 'id, name, email,o_id, cust_id, price'"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          name as string,",
+				"          email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> ADECustsource1",
+				"source(output(",
+				"          o_id as integer,",
+				"          cust_id as integer,",
+				"          price as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> ADEordersSource1",
+				"ADECustsource1, ADEordersSource1 join(id == cust_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> ADELeftJoin",
+				"ADELeftJoin select(mapColumn(",
+				"          id,",
+				"          name,",
+				"          email,",
+				"          cust_id,",
+				"          price",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> ADEselectedColumns",
+				"ADEselectedColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> ADEoutputdatasink"
+			]
+		}
+	}
+}
