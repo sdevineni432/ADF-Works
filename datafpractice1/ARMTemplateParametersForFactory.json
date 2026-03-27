@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafpractice1"
+		},
+		"LS_AzureSqlDB_password": {
+			"value": ""
+		},
+		"LS_Blobstorage_connectionString": {
+			"value": ""
+		},
+		"LS_Datalake_accountKey": {
+			"value": ""
+		},
+		"LS_MYSQL_password": {
+			"value": ""
+		},
+		"LS_AzureSqlDB_properties_typeProperties_server": {
+			"value": "sqldatabaseservermarch.database.windows.net"
+		},
+		"LS_AzureSqlDB_properties_typeProperties_database": {
+			"value": "AzureSQLDB-CI"
+		},
+		"LS_AzureSqlDB_properties_typeProperties_userName": {
+			"value": "ADEAZURESQL"
+		},
+		"LS_Datalake_properties_typeProperties_url": {
+			"value": "https://datalakepractice1.dfs.core.windows.net/"
+		},
+		"LS_GITHUB_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
+		"LS_MYSQL_properties_typeProperties_server": {
+			"value": "127.0.0.1"
+		},
+		"LS_MYSQL_properties_typeProperties_database": {
+			"value": "sales"
+		},
+		"LS_MYSQL_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"ADE_TriggerProdReady_pipeline_properties_typeProperties_scope": {
+			"value": "/subscriptions/15aefcb5-6c09-459d-beec-a671faf0d6b9/resourceGroups/ResourceGroup-CI/providers/Microsoft.Storage/storageAccounts/datalakepractice1"
+		}
+	}
+}

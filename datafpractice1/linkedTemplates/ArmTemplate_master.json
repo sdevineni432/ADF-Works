@@ -1,0 +1,173 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafpractice1"
+		},
+		"LS_AzureSqlDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_AzureSqlDB'"
+		},
+		"LS_Blobstorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_Blobstorage'"
+		},
+		"LS_Datalake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_Datalake'"
+		},
+		"LS_MYSQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_MYSQL'"
+		},
+		"LS_AzureSqlDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqldatabaseservermarch.database.windows.net"
+		},
+		"LS_AzureSqlDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AzureSQLDB-CI"
+		},
+		"LS_AzureSqlDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "ADEAZURESQL"
+		},
+		"LS_Datalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakepractice1.dfs.core.windows.net/"
+		},
+		"LS_GITHUB_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/"
+		},
+		"LS_MYSQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "127.0.0.1"
+		},
+		"LS_MYSQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sales"
+		},
+		"LS_MYSQL_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"ADE_TriggerProdReady_pipeline_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/15aefcb5-6c09-459d-beec-a671faf0d6b9/resourceGroups/ResourceGroup-CI/providers/Microsoft.Storage/storageAccounts/datalakepractice1"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "datafpractice1_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_AzureSqlDB_password": {
+						"value": "[parameters('LS_AzureSqlDB_password')]"
+					},
+					"LS_Blobstorage_connectionString": {
+						"value": "[parameters('LS_Blobstorage_connectionString')]"
+					},
+					"LS_Datalake_accountKey": {
+						"value": "[parameters('LS_Datalake_accountKey')]"
+					},
+					"LS_AzureSqlDB_properties_typeProperties_server": {
+						"value": "[parameters('LS_AzureSqlDB_properties_typeProperties_server')]"
+					},
+					"LS_AzureSqlDB_properties_typeProperties_database": {
+						"value": "[parameters('LS_AzureSqlDB_properties_typeProperties_database')]"
+					},
+					"LS_AzureSqlDB_properties_typeProperties_userName": {
+						"value": "[parameters('LS_AzureSqlDB_properties_typeProperties_userName')]"
+					},
+					"LS_Datalake_properties_typeProperties_url": {
+						"value": "[parameters('LS_Datalake_properties_typeProperties_url')]"
+					},
+					"LS_GITHUB_properties_typeProperties_url": {
+						"value": "[parameters('LS_GITHUB_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "datafpractice1_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_MYSQL_password": {
+						"value": "[parameters('LS_MYSQL_password')]"
+					},
+					"LS_MYSQL_properties_typeProperties_server": {
+						"value": "[parameters('LS_MYSQL_properties_typeProperties_server')]"
+					},
+					"LS_MYSQL_properties_typeProperties_database": {
+						"value": "[parameters('LS_MYSQL_properties_typeProperties_database')]"
+					},
+					"LS_MYSQL_properties_typeProperties_username": {
+						"value": "[parameters('LS_MYSQL_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'datafpractice1_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "datafpractice1_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADE_TriggerProdReady_pipeline_properties_typeProperties_scope": {
+						"value": "[parameters('ADE_TriggerProdReady_pipeline_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'datafpractice1_ArmTemplate_1')]"
+			]
+		}
+	]
+}
