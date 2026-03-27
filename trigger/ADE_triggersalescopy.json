@@ -1,0 +1,24 @@
+{
+	"name": "ADE_triggersalescopy",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ADE_pipelineSales",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2026-03-18T06:47:00",
+				"timeZone": "GMT Standard Time"
+			}
+		}
+	}
+}

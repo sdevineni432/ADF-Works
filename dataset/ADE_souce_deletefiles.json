@@ -1,0 +1,56 @@
+{
+	"name": "ADE_souce_deletefiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "deletefiles3daysafter"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "InvoiceNo",
+				"type": "String"
+			},
+			{
+				"name": "StockCode",
+				"type": "String"
+			},
+			{
+				"name": "Description",
+				"type": "String"
+			},
+			{
+				"name": "Quantity",
+				"type": "String"
+			},
+			{
+				"name": "InvoiceDate",
+				"type": "String"
+			},
+			{
+				"name": "UnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "CustomerID",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

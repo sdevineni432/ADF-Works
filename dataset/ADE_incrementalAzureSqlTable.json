@@ -1,0 +1,35 @@
+{
+	"name": "ADE_incrementalAzureSqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSqlDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Order_Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "First_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Last_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Inserted_Date",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "orders"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

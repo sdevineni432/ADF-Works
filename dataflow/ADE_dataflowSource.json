@@ -1,0 +1,78 @@
+{
+	"name": "ADE_dataflowSource",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ADESourcedataflow",
+						"type": "DatasetReference"
+					},
+					"name": "ADESourceCSV"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DataFlow_destination_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "ADEsink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectColumns"
+				},
+				{
+					"name": "filterROWS"
+				},
+				{
+					"name": "splitUK"
+				},
+				{
+					"name": "ADEaggregate"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          InvoiceNo as integer,",
+				"          StockCode as integer,",
+				"          Description as string,",
+				"          Quantity as integer,",
+				"          InvoiceDate as date,",
+				"          UnitPrice as integer,",
+				"          CustomerID as string,",
+				"          Country as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ADESourceCSV",
+				"ADESourceCSV select(mapColumn(",
+				"          InvoiceNo,",
+				"          StockCode,",
+				"          Description,",
+				"          UnitPrice,",
+				"          CustomerID,",
+				"          Country",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectColumns",
+				"selectColumns filter(InvoiceNo!=537668) ~> filterROWS",
+				"filterROWS split(Country=='United Kingdom',",
+				"     Country=='Germany',",
+				"     disjoint: false) ~> splitUK@(UK, Germany, others)",
+				"splitUK@UK aggregate(groupBy(InvoiceNo),",
+				"     UnitPrice = sum(UnitPrice)) ~> ADEaggregate",
+				"ADEaggregate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> ADEsink"
+			]
+		}
+	}
+}

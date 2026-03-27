@@ -1,0 +1,16 @@
+{
+	"name": "ADE_MySqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_MYSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`customer`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

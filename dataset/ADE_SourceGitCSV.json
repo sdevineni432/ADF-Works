@@ -1,0 +1,23 @@
+{
+	"name": "ADE_SourceGitCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_GITHUB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "sdevineni432/AZUREDATA-ENGINEER/refs/heads/main/ADF%20RAWFILES/sales_invoice.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

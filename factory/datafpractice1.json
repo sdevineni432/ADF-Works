@@ -1,0 +1,9 @@
+{
+	"name": "datafpractice1",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ba07195f-749a-4ccc-acbc-4fbf13413a46",
+		"tenantId": "194793d0-0f17-4fae-8efc-b95db6cea7f6"
+	}
+}

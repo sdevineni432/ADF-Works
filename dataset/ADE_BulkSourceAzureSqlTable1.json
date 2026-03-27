@@ -1,0 +1,31 @@
+{
+	"name": "ADE_BulkSourceAzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSqlDB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_dbname": {
+				"type": "string"
+			},
+			"p_tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().p_dbname",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().p_tablename",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

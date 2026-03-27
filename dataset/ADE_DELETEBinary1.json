@@ -1,0 +1,27 @@
+{
+	"name": "ADE_DELETEBinary1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().p_filename",
+					"type": "Expression"
+				},
+				"fileSystem": "deletefiles3daysafter"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

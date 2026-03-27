@@ -1,0 +1,63 @@
+{
+	"name": "ADE_dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ADE_SOURCE_scd",
+						"type": "DatasetReference"
+					},
+					"name": "ADESourcescd"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ADE_AzureSqlTable",
+						"type": "DatasetReference"
+					},
+					"name": "ADEScdSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ADEalterRow"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_id as integer,",
+				"          name as string,",
+				"          Salary as integer,",
+				"          Location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> ADESourcescd",
+				"ADESourcescd alterRow(upsertIf(1==1),",
+				"     partitionBy('hash', 1)) ~> ADEalterRow",
+				"ADEalterRow sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          emp_id as integer,",
+				"          name as string,",
+				"          Salary as integer,",
+				"          Location as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['emp_id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     partitionBy('hash', 1)) ~> ADEScdSink"
+			]
+		}
+	}
+}

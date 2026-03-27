@@ -1,0 +1,72 @@
+{
+	"name": "ADE_PRODpipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute PipelineCOPY",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ADE_pipelineCopy",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Execute PipelineGithub",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute PipelineCOPY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ADE_PipelineGithub",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Execute PipelineSales",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute PipelineGithub",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ADE_pipelineSales",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-18T14:10:57Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

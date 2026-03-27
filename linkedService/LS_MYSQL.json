@@ -1,0 +1,22 @@
+{
+	"name": "LS_MYSQL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "MySql",
+		"typeProperties": {
+			"server": "127.0.0.1",
+			"port": 3306,
+			"database": "sales",
+			"username": "root",
+			"sslMode": 1,
+			"useSystemTrustStore": 0,
+			"driverVersion": "v2",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwMzg5ZDdmMC1kZmM3LTRlMzgtOWY5ZC05ZmZhNWI5MDEyOWIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime-selfhosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

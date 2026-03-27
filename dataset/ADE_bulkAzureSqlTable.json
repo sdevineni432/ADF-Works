@@ -1,0 +1,13 @@
+{
+	"name": "ADE_bulkAzureSqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSqlDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

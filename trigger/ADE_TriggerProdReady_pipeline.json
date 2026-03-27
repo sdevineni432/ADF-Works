@@ -1,0 +1,24 @@
+{
+	"name": "ADE_TriggerProdReady_pipeline",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ADE_PRODpipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/source/blobs/csv-files/x_test_data.csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/15aefcb5-6c09-459d-beec-a671faf0d6b9/resourceGroups/ResourceGroup-CI/providers/Microsoft.Storage/storageAccounts/datalakepractice1",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
